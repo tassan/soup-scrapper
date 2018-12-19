@@ -6,4 +6,9 @@ my_url = 'https://www.newegg.com/Desktop-Graphics-Cards/SubCategory/ID-48?Tid=77
 # opening connection, grabbing the page
 uClient = uReq(my_url)
 page_html = uClient.read()
+
+page_soup = soup(page_html, "html.parser")
+
+containers = page_soup.findAll("div", {"clas":"item-container"})
+
 uClient.close()
