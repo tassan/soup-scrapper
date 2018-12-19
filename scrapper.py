@@ -16,7 +16,7 @@ containers = page_soup.find_all("div", {"class":"item-container"})
 filename = "graphic_cards.csv"
 csv = open(filename, "w")
 
-headers = "brand, product_name, price"
+headers = "brand, product_name, price \n"
 
 csv.write(headers)
 
