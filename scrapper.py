@@ -14,11 +14,11 @@ page_soup = soup(page_html, "html.parser")
 containers = page_soup.find_all("div", {"class":"item-container"})
 
 filename = "graphic_cards.csv"
-f = open(filename, "w")
+csv = open(filename, "w")
 
 headers = "brand, product_name, price"
 
-f.write(headers)
+csv.write(headers)
 
 # loop through products and grab the gpu name
 for container in containers:
@@ -26,13 +26,13 @@ for container in containers:
     brand = brand_container.img["title"]
     product_name = container.a.img["title"]
     price_container = container.find("li", {"class":"price-current"})
-    price = ''.join([price_container.strong.string, price_container.sup.string])
+    price = f"${price_container.strong.string}{price_container.sup.string}"
     
     # print("brand: " + brand)
     # print("product_name: " + product_name)
     # print("price: " + price)
 
-    f.write(brand + ";" + product_name.replace(",", "|") + ";" + price + "\n")
+    csv.write(brand + ";" + product_name.replace(",", "|") + ";" + price + "\n")
 
-f.close
+csv.close
 uClient.close()
