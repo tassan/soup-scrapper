@@ -33,7 +33,7 @@ for container in containers:
     # print("product_name: " + product_name)
     # print("price: " + price)
 
-    csv.write(brand.replace(",","") + "," + product_name.replace(",", "|") + "," + price.replace(",","") + "\n")
+    csv.write(brand.replace(",","") + "," + product_name.replace(",", "|") + "," + price.replace(".","").replace(",",".") + "\n")
 
 csv.close
 uClient.close()
