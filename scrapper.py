@@ -28,9 +28,9 @@ for container in containers:
     price_container = container.find("li", {"class":"price-current"})
     price = ''.join([price_container.strong.string, price_container.sup.string])
     
-    print("brand: " + brand)
-    print("product_name: " + product_name)
-    print("price: " + price)
+    # print("brand: " + brand)
+    # print("product_name: " + product_name)
+    # print("price: " + price)
 
     f.write(brand + ";" + product_name.replace(",", "|") + ";" + price + "\n")
 
