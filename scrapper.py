@@ -9,6 +9,6 @@ page_html = uClient.read()
 
 page_soup = soup(page_html, "html.parser")
 
-containers = page_soup.findAll("div", {"clas":"item-container"})
+containers = page_soup.find_all("div", {"class":"item-container"})
 
 uClient.close()
