@@ -16,7 +16,7 @@ containers = page_soup.find_all("div", {"class":"item-container"})
 filename = "graphic_cards.csv"
 csv = open(filename, "w")
 
-headers = "brand, product_name, price \n"
+headers = "brand, product_name, price;\n"
 
 csv.write(headers)
 
@@ -32,7 +32,9 @@ for container in containers:
     # print("product_name: " + product_name)
     # print("price: " + price)
 
-    csv.write(brand + "," + product_name.replace(",", "|") + "," + price.replace(",","") + "\n")
+    csv.write(brand + "," + product_name.replace(",", "|") + "," + price.replace(",","") + ";\n")
 
 csv.close
 uClient.close()
+
+print("Scrapping Completed!")
