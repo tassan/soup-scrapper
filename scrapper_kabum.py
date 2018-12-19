@@ -1,7 +1,8 @@
+import unidecode
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 
-my_url = 'https://www.newegg.com/Desktop-Graphics-Cards/SubCategory/ID-48?Tid=7709'
+my_url = 'https://www.kabum.com.br/hardware/placa-de-video-vga?ordem=5&limite=100&pagina=1&string='
 
 # opening connection, grabbing the page
 uClient = uReq(my_url)
@@ -11,9 +12,9 @@ page_html = uClient.read()
 page_soup = soup(page_html, "html.parser")
 
 # grabs each product
-containers = page_soup.find_all("div", {"class":"item-container"})
+containers = page_soup.find_all("div", {"class":"listagem-box"})
 
-filename = 'csv_files/graphic_cards.csv'
+filename = 'csv_files/graphic_cards_kabum.csv'
 csv = open(filename, "w")
 
 headers = "brand, product_name, price\n"
@@ -22,11 +23,11 @@ csv.write(headers)
 
 # loop through products and grab the gpu name
 for container in containers:
-    brand_container = container.find("a", {"class":"item-brand"})
-    brand = brand_container.img["title"]
-    product_name = container.a.img["title"]
-    price_container = container.find("li", {"class":"price-current"})
-    price = f"${price_container.strong.string}{price_container.sup.string}"
+    brand_container = container.find("div", {"class":"listagem-marca_avaliacao"})
+    brand = brand_container.img["title"].replace("Logo ", "")
+    product_name = unidecode.unidecode(container.a.img["title"])
+    price_container = container.find("div", {"class":"listagem-precoavista"})
+    price = f"{price_container.b.string}"
     
     # print("brand: " + brand)
     # print("product_name: " + product_name)
